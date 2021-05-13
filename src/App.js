@@ -8,12 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Main>
-
-      <EmployeeTable>
-      <Employees/>
-      </EmployeeTable>
-      </Main>
+      <Main />
     </div>
   );
 }
