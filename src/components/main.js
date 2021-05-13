@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./style.css";
 import EmployeeTable from "./employeetable";
 import Employees from "./employeedata";
 import API from "../utils/API";
@@ -7,7 +6,7 @@ import API from "../utils/API";
 
 class MainEmployeeData extends Component {
   state = {
-    result: {}
+    employees: {}
   }
 componentDidMount() {
   this.createDirectory();
@@ -15,14 +14,16 @@ componentDidMount() {
 
 createDirectory = () => {
  API.getEmployees()
- .then(res => this.setState({result: res.data}))
+ .then(res => this.setState({employees: res.results}))
  .catch(err => console.log(err));
 };
 
   render() {
     return <main className="main">
       <EmployeeTable>
-        <Employees />
+        <Employees 
+        employees={this.state.employees}
+        />
       </EmployeeTable>
     </main>;
   }
