@@ -35,7 +35,7 @@ handleInputChange = searchvalue => {
 filterResults = () => { 
   const employeeArr = this.state.employees
   console.log(this.state.search)
-  const finalArr = this.state.employees.filter(employee => employee.name.first.toLowerCase().includes(this.state.search.toLowerCase()))
+  const finalArr = this.state.employees.filter(employee => (employee.name.first+" "+employee.name.last).toLowerCase().includes(this.state.search.toLowerCase()))
   this.setState({ filteredemployees: finalArr})
 }
 
