@@ -6,7 +6,7 @@ function EmployeeTable(props) {
             <thead>
                 <tr>
                     <th scope="col">Photo</th>
-                    <th scope="col" onClick={props.sortAsc} value='name.first'>Name</th>
+                    <th scope="col" onClick={props.sort} value='name.first'>Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">DOB</th>

@@ -39,19 +39,14 @@ filterResults = () => {
   this.setState({ filteredemployees: finalArr})
 }
 
-sortAsc = (event) => {
+sort = () => {
   const employeeArr = this.state.employees
   // let newOrder = employeeArr.sort(compareValues(event.target.value))
-  let newOrder =  employeeArr.sort((a,b)=>{ return a.name.first > b.name.first ? 1 : -1 })
-  
-  this.setState(newOrder)
+  const newOrder = this.state.ascending?  employeeArr.sort((a,b)=>{ return a.name.first > b.name.first ? 1 : -1 }): employeeArr.sort((a,b)=>{ return a.name.first > b.name.first ? -1 : 1 })
+  this.setState({...this.state, employees:newOrder})
+  this.state.ascending? this.setState({...this.state, ascending:false}): this.setState({...this.state, ascending:true})
 }
 
-sortDesc = (event) => {
-  const employeeArr = this.state.employees
-  let newOrder = employeeArr.sort(compareValues(event.target.value, 'desc'))
-  this.setState(newOrder)
-}
 
   render() {
     return <main className="main">
@@ -60,7 +55,7 @@ sortDesc = (event) => {
       filterResults={this.filterResults}
       />
       <EmployeeTable
-      sortAsc={this.sortAsc}
+      sort={this.sort}
       sortDesc={this.sortDesc}
       >
         <Employees 
