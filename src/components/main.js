@@ -5,6 +5,7 @@ import API from "../utils/API";
 import SearchForm from "./search";
 
 
+
 class MainEmployeeData extends Component {
   state = {
     employees: [],
@@ -12,53 +13,57 @@ class MainEmployeeData extends Component {
     filteredemployees: [],
     ascending: true
   }
-componentDidMount() {
-  this.createDirectory();
-}
+  componentDidMount() {
+    this.createDirectory();
+  }
 
-createDirectory = () => {
- API.getEmployees()
- .then(res => {
-   this.setState({...this.state, employees: res.data.results})
-  })
- .catch(err => console.log(err));
-};
+  createDirectory = () => {
+    API.getEmployees()
+      .then(res => {
+        this.setState({ ...this.state, employees: res.data.results })
+      })
+      .catch(err => console.log(err));
+  };
 
-handleInputChange = searchvalue => {
-  this.setState({...this.state, search: searchvalue });
-  this.filterResults()
-};
+  handleInputChange = searchvalue => {
+    this.setState({ ...this.state, search: searchvalue });
+    this.filterResults()
+  };
 
-filterResults = () => { 
+  filterResults = () => {
 
 
-  const finalArr = this.state.employees.filter(employee => (employee.name.first+" "+employee.name.last).toLowerCase().includes(this.state.search.toLowerCase()))
-  this.setState({ filteredemployees: finalArr})
-}
+    const finalArr = this.state.employees.filter(employee => (employee.name.first + " " + employee.name.last).toLowerCase().includes(this.state.search.toLowerCase()))
+    this.setState({ filteredemployees: finalArr })
+  }
 
-sort = () => {
-  const employeeArr = this.state.employees
-  // let newOrder = employeeArr.sort(compareValues(event.target.value))
-  const newOrder = this.state.ascending?  employeeArr.sort((a,b)=>{ return a.name.first > b.name.first ? 1 : -1 }): employeeArr.sort((a,b)=>{ return a.name.first > b.name.first ? -1 : 1 })
-  this.setState({...this.state, employees:newOrder})
-  this.state.ascending? this.setState({...this.state, ascending:false}): this.setState({...this.state, ascending:true})
-}
+  sort = () => {
+    const employeeArr = this.state.employees
+    // let newOrder = employeeArr.sort(compareValues(event.target.value))
+    const newOrder = this.state.ascending ? employeeArr.sort((a, b) => { return a.name.first > b.name.first ? 1 : -1 }) : employeeArr.sort((a, b) => { return a.name.first > b.name.first ? -1 : 1 })
+    this.setState({ ...this.state, employees: newOrder })
+    this.state.ascending ? this.setState({ ...this.state, ascending: false }) : this.setState({ ...this.state, ascending: true })
+  }
 
 
   render() {
-    return <main className="main">
-      <SearchForm 
-      handleInputChange={this.handleInputChange}
-      filterResults={this.filterResults}
+    return <main className="main container">
+      <SearchForm
+        handleInputChange={this.handleInputChange}
+        filterResults={this.filterResults}
       />
-      <EmployeeTable
-      sort={this.sort}
-      sortDesc={this.sortDesc}
-      >
-        <Employees 
-        employees= {this.state.search.length ? this.state.filteredemployees : this.state.employees}
-        />
-      </EmployeeTable>
+      <div className="row">
+        <div className="col-md-1"></div>
+        <EmployeeTable
+          sort={this.sort}
+          sortDesc={this.sortDesc}
+        >
+          <Employees
+            employees={this.state.search.length ? this.state.filteredemployees : this.state.employees}
+          />
+        </EmployeeTable>
+        <div className="col-md-1"></div>
+      </div>
     </main>;
   }
 
