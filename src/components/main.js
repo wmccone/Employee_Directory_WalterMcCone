@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import EmployeeTable from "./employeetable";
 import Employees from "./employeedata";
 import API from "../utils/API";
-import compareValues from "../utils/sort";
 import SearchForm from "./search";
 
 
@@ -20,7 +19,6 @@ componentDidMount() {
 createDirectory = () => {
  API.getEmployees()
  .then(res => {
-   console.log(res)
    this.setState({...this.state, employees: res.data.results})
   })
  .catch(err => console.log(err));
@@ -28,13 +26,12 @@ createDirectory = () => {
 
 handleInputChange = searchvalue => {
   this.setState({...this.state, search: searchvalue });
-  console.log(this.state.search)
   this.filterResults()
 };
 
 filterResults = () => { 
-  const employeeArr = this.state.employees
-  console.log(this.state.search)
+
+
   const finalArr = this.state.employees.filter(employee => (employee.name.first+" "+employee.name.last).toLowerCase().includes(this.state.search.toLowerCase()))
   this.setState({ filteredemployees: finalArr})
 }

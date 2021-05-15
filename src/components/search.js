@@ -13,10 +13,6 @@ function SearchForm(props) {
             placeholder="Search For an employee"
             id="search"
           />
-          <br />
-          <button onClick={props.filterResults} className="btn btn-primary">
-            Search
-          </button>
         </div>
       </form>
     );
