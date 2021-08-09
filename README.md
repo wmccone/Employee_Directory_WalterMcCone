@@ -15,7 +15,7 @@
 
   ## Installation
 
-  Go to the [deployed app](https://ancient-sands-50586.herokuapp.com/)
+  Go to the [deployed app](https://wmccone-employee-directory.herokuapp.com/)
 
   ## Usage
 
